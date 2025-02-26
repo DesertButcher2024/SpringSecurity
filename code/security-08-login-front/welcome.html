@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="js/axios.js"></script>
+    <title>欢迎使用</title>
+</head>
+<body>
+    欢迎使用..... <br/>
+    <a href="javascript:logout()">退出登录</a> <br/><br/>
+
+    <a href="javascript:getUserInfo()">获取用户信息</a> <br/>
+    <a href="javascript:void(0)" onclick="getUserInfo()">获取用户信息</a>
+
+    <!--
+        张琪  这个用户 拥有如下权限资源：
+        线索管理-列表	clue:list
+        线索管理-录入	clue:add
+        线索管理-编辑	clue:edit
+        线索管理-查看	clue:view
+        线索管理-导入	clue:import
+    -->
+    <a href="javascript:clueList()">线索列表</a> <br/>
+    <a href="javascript:clueInput()">线索录入</a> <br/>
+    <a href="javascript:clueEdit()">线索编辑</a> <br/>
+    <a href="javascript:clueView()">线索查看</a> <br/>
+    <a href="javascript:clueImport()">线索导入</a> <br/> <br/>
+
+    <a href="javascript:clueDelete()">线索删除</a> <br/>
+    <a href="javascript:clueExport()">线索导出</a> <br/>
+</body>
+
+<script type="text/javascript">
+    let token = window.sessionStorage.getItem("loginToken");
+
+    function getUserInfo() {
+        //直接调用方法，请求后端
+        /*axios.get('http://localhost:8080/welcome').then(function (response) {
+            // 处理成功情况
+            console.log(response);
+        }).catch(function (error) {
+            // 处理错误情况
+            console.log(error);
+        }).finally(function () {
+            // 总是会执行
+        });*/
+
+        let token = window.sessionStorage.getItem("loginToken");
+        //通过配置方式，请求后端
+        axios({
+            method: 'get',
+            url: 'http://localhost:8080/welcome',
+            responseType: 'json',
+            //自定义请求头
+            headers: {'token': token},
+        }).then(function (response) {
+            console.log("登录后访问welcome接口的返回结果：", response)
+        });
+    }
+
+    function logout() {
+        /*axios.get('http://localhost:8080/user/logout').then(function (response) {
+            // 处理成功情况
+            console.log(response);
+
+        }).catch(function (error) {
+            // 处理错误情况
+            console.log(error);
+        }).finally(function () {
+            // 总是会执行
+        });*/
+
+        let token = window.sessionStorage.getItem("loginToken");
+        //通过配置方式，请求后端
+        axios({
+            method: 'get',
+            url: 'http://localhost:8080/user/logout',
+            responseType: 'json',
+            //自定义请求头
+            headers: {'token': token},
+        }).then(function (response) {
+            console.log("退出接口的返回结果：", response)
+        });
+    }
+
+    function clueList() {
+        axios({
+            method: 'get',
+            url: 'http://localhost:8080/api/clue/list',
+            responseType: 'json',
+            //自定义请求头
+            headers: {'token': token},
+        }).then(function (response) {
+            console.log("访问/api/clue/list接口的返回结果：", response)
+        });
+    }
+    function clueInput() {
+        axios({
+            method: 'get',
+            url: 'http://localhost:8080/api/clue/input',
+            responseType: 'json',
+            //自定义请求头
+            headers: {'token': token},
+        }).then(function (response) {
+            console.log("访问/api/clue/input接口的返回结果：", response)
+        });
+    }
+    function clueEdit() {
+        axios({
+            method: 'get',
+            url: 'http://localhost:8080/api/clue/edit',
+            responseType: 'json',
+            //自定义请求头
+            headers: {'token': token},
+        }).then(function (response) {
+            console.log("访问/api/clue/edit接口的返回结果：", response)
+        });
+    }
+    function clueView() {
+        axios({
+            method: 'get',
+            url: 'http://localhost:8080/api/clue/view',
+            responseType: 'json',
+            //自定义请求头
+            headers: {'token': token},
+        }).then(function (response) {
+            console.log("访问/api/clue/view接口的返回结果：", response)
+        });
+    }
+    function clueImport() {
+        axios({
+            method: 'get',
+            url: 'http://localhost:8080/api/clue/imports',
+            responseType: 'json',
+            //自定义请求头
+            headers: {'token': token},
+        }).then(function (response) {
+            console.log("访问/api/clue/imports接口的返回结果：", response)
+        });
+    }
+
+    function clueDelete() {
+        axios({
+            method: 'get',
+            url: 'http://localhost:8080/api/clue/del',
+            responseType: 'json',
+            //自定义请求头
+            headers: {'token': token},
+        }).then(function (response) {
+            console.log("访问/api/clue/del接口的返回结果：", response)
+        });
+    }
+    function clueExport() {
+        axios({
+            method: 'get',
+            url: 'http://localhost:8080/api/clue/export',
+            responseType: 'json',
+            //自定义请求头
+            headers: {'token': token},
+        }).then(function (response) {
+            console.log("访问/api/clue/export接口的返回结果：", response)
+        });
+    }
+</script>
+</html>

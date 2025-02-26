@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="js/axios.js"></script>
+    <!--<script src="https://unpkg.com/vue@3.5.3/dist/vue.global.js"></script>-->
+    <script src="js/vue.global.js"></script>
+    <title>登录</title>
+</head>
+
+<body>
+  <form>
+    账号：<input type="text" id="username" name="username"> <br/>
+    密码：<input type="password" id="password" name="password"> <br/>
+    <input type="button" value="登 录" onclick="login()">
+  </form>
+</body>
+
+<script type="text/javascript">
+    function login() {
+        let username = document.getElementById('username').value;
+        let password = document.getElementById('password').value;
+
+        //FormData是一个javascript对象，可以直接在js代码中使用
+        let date = new Date(); //js的日期对象
+
+        let formData = new FormData();//js表单数据对象
+        formData.append("username", username); //把登录账号放入到了js表单数据对象中
+        formData.append("password", password); //把登录密码放入到了js表单数据对象中
+        axios.post('http://localhost:8080/user/login', formData).then( (response) => {
+            console.log(response);
+            //进行登录结果的判断，和 页面的跳转
+            if (response.data.code === 200) { //表示登录成功
+                console.log("token", response.data.info)
+                //把token存储在浏览器中
+                window.sessionStorage.setItem("loginToken", response.data.info)
+                //indow.localStorage.setItem("loginToken", response.data.info)
+                window.location.href = "welcome.html"
+            } else {
+                alert(response.data.msg);
+            }
+        }).catch( (error) => {
+            console.log(error);
+        });
+    }
+</script>
+</html>

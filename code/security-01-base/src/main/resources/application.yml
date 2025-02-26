@@ -1,0 +1,9 @@
+#配置项目的名称，现在我们用不到该配置，这个配置在后续微服务中会使用
+spring:
+  application:
+    name: security-01-base
+
+  security:
+    user:
+      name: cat
+      password: aaa111

@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: security-08-login-api
+
+  #jackson进行json转换时使用指定的时区和格式进行转换
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+  datasource:
+    username: root
+    password: 123
+    url: jdbc:mysql://localhost:3306/dlyk
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
